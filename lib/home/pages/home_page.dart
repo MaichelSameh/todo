@@ -1,6 +1,7 @@
 import 'package:first_project/models/task_info.dart';
 import 'package:first_project/services/task_services.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -89,7 +90,61 @@ class _HomePageState extends State<HomePage> {
                     const Spacer(flex: 2),
                   ],
                 )
-              : Column(),
+              : ListView(
+                  padding: EdgeInsets.zero,
+                  children: <Widget>[
+                    SizedBox(height: 8),
+                    for (int i = 0; i < 10; i++)
+                      for (var task in tasks)
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 12,
+                          ),
+                          margin:
+                              EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF363636),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                height: 16,
+                                width: 16,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.white.withOpacity(0.87)),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              SizedBox(width: 12),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    task.name,
+                                    style: TextStyle(
+                                      color: Colors.white.withOpacity(.87),
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  SizedBox(height: 6),
+                                  Text(
+                                    DateFormat.yMMMMEEEEd().format(task.date),
+                                    style: TextStyle(
+                                      color: Color(0xFFAFAFAF),
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                    SizedBox(height: 8),
+                  ],
+                ),
         ),
       ],
     );

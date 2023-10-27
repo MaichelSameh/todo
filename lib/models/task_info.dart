@@ -41,8 +41,8 @@ class TaskInfo {
   int get priority => _priority;
 
   Map<String, dynamic> get toMap => {
-        "created_at": DateFormat("dd-MM-yyyy HH:mm").format(createdAt),
-        "date": DateFormat("dd-MM-YYYY HH:mm").format(date),
+        "created_at": DateFormat("yyyy-MM-dd HH:mm").format(createdAt),
+        "date": DateFormat("yyyy-MM-dd HH:mm").format(date),
         "description": description,
         "name": name,
         "priority": priority,

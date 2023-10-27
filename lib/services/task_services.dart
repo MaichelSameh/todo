@@ -12,7 +12,7 @@ class TaskServices {
     required DateTime dateTime,
   }) async {
     //creating a record in the local database with the given task information
-    int id = await Hive.box<Map<String, dynamic>>("tasks").add(
+    int id = await Hive.box<Map<dynamic, dynamic>>("tasks").add(
       TaskInfo(
         createdAt: DateTime.now(),
         date: dateTime,
@@ -37,12 +37,15 @@ class TaskServices {
   ///A function that fetch all the saved tasks from the database
   List<TaskInfo> getAll() {
     List<TaskInfo> result = <TaskInfo>[];
-    for (dynamic key in Hive.box<Map<String, dynamic>>("tasks").keys) {
+    for (dynamic key in Hive.box<Map<dynamic, dynamic>>("tasks").keys) {
+      Map<dynamic, dynamic> res =
+          Hive.box<Map<dynamic, dynamic>>("tasks").get(key)!;
+
       result.add(
         TaskInfo.fromMap(
           {
             "id": key.toString(),
-            ...Hive.box<Map<String, dynamic>>("tasks").get(key)!,
+            for (var item in res.entries) item.key.toString(): item.value,
           },
         ),
       );

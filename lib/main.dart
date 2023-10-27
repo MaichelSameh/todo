@@ -7,7 +7,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var res = await getApplicationDocumentsDirectory();
   Hive.init(res.path);
-  await Hive.openBox<Map<String, dynamic>>("tasks");
+  await Hive.openBox<Map<dynamic, dynamic>>("tasks");
   runApp(const MyApp());
 }
 
@@ -35,7 +35,11 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF8687E7),
+          surface: const Color(0xFF363636),
+        ),
+        textTheme: TextTheme(bodyMedium: TextStyle(color: Colors.white)),
         useMaterial3: true,
       ),
       home: const HomeScreen(),

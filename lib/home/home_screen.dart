@@ -1,5 +1,6 @@
 import 'package:first_project/home/pages/home_page.dart';
 import 'package:first_project/home/pages/profile_page.dart';
+import 'package:first_project/widgets/dialogs/add_tasak_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -66,17 +67,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              Container(
-                height: 64,
-                width: 64,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF8687E7),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 30,
+              GestureDetector(
+                onTap: () async {
+                  await showDialog(
+                    context: context,
+                    builder: (_) => AddTaskDialog(
+                      ctx: context,
+                    ),
+                  );
+                  setState(() {});
+                },
+                child: Container(
+                  height: 64,
+                  width: 64,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF8687E7),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 30,
+                  ),
                 ),
               )
             ],
